@@ -77,7 +77,10 @@ class mpu9250(object):
 				GYRO_CONFIG: AK8963_14BIT | AK8963_100HZ
 			}
 		"""
-		self.bus = smbus.SMBus(bus)
+		if isinstance(bus, int):
+		    self.bus = smbus.SMBus(bus)
+		else:
+		    self.bus = bus
 
 		# let's double check we have the correct device address
 		ret = self.read8(MPU9250_ADDRESS, WHO_AM_I)
